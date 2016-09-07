@@ -1,0 +1,185 @@
+html {
+  min-width: 100%;
+  min-height: 100%;
+  background-position: top center;
+  overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    background-color: #6F8EB4;
+    background-image: url(../Images/bar2.jpg);
+    background-size: cover;
+    padding: 10px 10px;
+}
+
+.button { /* Form Submit Buttons */
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 20px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.formField { /* Form Fields */
+    width: 12%;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 20px;
+    color: white;
+    padding: 5px 10px;
+    border: 2px solid white;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    background: transparent;
+    -webkit-transition: 1s;
+    transition:  1s;
+}
+
+input.formField:focus { /* Location */
+    background-color: rgba(0,0, 0, 0.5);
+    width: 15%
+}
+
+select.formField:focus { /* Drop-Down */
+    background-color: rgba(0,0, 0, 0.5);
+}
+
+option {
+    background-color: #827258;
+}
+
+p.search, form { /* Form Text */
+    display: inline;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: white;
+    font-size: 25px;
+}
+
+#logoMain {
+    width: 30%;
+}
+
+
+td.location { /* Locations */
+    font-size: 20px;
+}
+
+a { /* Location Links */
+    text-decoration: none;
+    color: #081930;
+}
+
+#catForm {
+    display: inline;
+    margin-left: 20px;
+}
+
+td {
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
+}
+
+th {
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: #081930;
+}
+
+tr.odd {
+   background-color: #F0F0F0; 
+   -webkit-transition: .5s all;   
+   -moz-transition: .5s all;   
+   -ms-transition: .5s all;   
+   -o-transition: .5s all;   
+   transition: .5s all;   
+}
+
+tr.even {
+   background-color: #D3D9DF;
+   -webkit-transition: .5s all;   
+   -moz-transition: .5s all;   
+   -ms-transition: .5s all;   
+   -o-transition: .5s all;   
+   transition: .5s all;
+}
+
+tr.odd:hover {
+  background-color: #f2f2f2;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+}
+
+tr.even:hover {
+  background-color: #E1E6EA;
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+}
+
+td.deal {
+    height: 100px;
+    width: 10%;
+    text-align: left;
+    padding: 10px;
+}
+
+td.today { /* Formatting Todays Deals */
+    background-color: #827258;
+    color: white;
+   -webkit-transition: .5s all;   
+   -moz-transition: .5s all;   
+   -ms-transition: .5s all;   
+   -o-transition: .5s all;   
+   transition: .5s all;
+}
+
+td.today:hover {
+   background-color: #998566;
+   -webkit-transition-delay: 0s;
+   -moz-transition-delay: 0s;
+   -ms-transition-delay: 0s;
+   -o-transition-delay: 0s;
+   transition-delay: 0s; 
+}
+
+td.location {
+    width: 15%;
+}
+
+#tableWrapper {
+  position:relative;
+}
+
+#tableScroll { /*Table Header*/
+  height: 70vh; /*View Height*/
+  overflow:auto;  
+  margin-top:40px; 
+}
+
+#tableWrapper table thead th .header{ /* Header Text */
+  position:absolute;   
+  top:-25px;
+  z-index:2;
+  margin-left: -2%;
+  font-size: 20px;
+}
+
+/* For ViewPointChecker.js */
+.hidden{
+     opacity: 0;
+}
+.visible{
+     opacity: 1;
+}
