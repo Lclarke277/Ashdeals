@@ -66,10 +66,10 @@
     // Setting 'Today'
     date_default_timezone_set('EST');
     $today = date("N"); // Integer Representing Today
-
-
+    
     if (isset($_POST['locSubmit'])) {
         
+        //$sql = "SELECT * FROM deals WHERE day IN ('Monday')";
         $sql = "SELECT * FROM deals WHERE location like '%" . $_POST['search'] . "%'";
         search($sql);
     
@@ -81,11 +81,18 @@
     } elseif (isset($_GET['daySubmit'])) {
         
         $dayString = "'" . implode("', '", $_GET['day']) . "'"; //Turn Array into String for SQL Query
-        echo "dayString: " . $dayString; 
-        echo "<br>";
-        $sql = "SELECT * FROM deals WHERE day IN (" . $dayString . ") AND deal != ''";
+        echo "dayString: " . $dayString . "<br>";
+        //echo "<br>";
         $dayArray = explode("', '", $dayString); //Turn String back to Array for Search Func
-        echo "dayArray: ";
+        
+            if (count($dayArray) > 1) {
+                $sql = "SELECT * FROM deals WHERE day IN (" . $dayString . ")";
+            }
+
+            else {
+            $sql = "SELECT * FROM deals WHERE day IN (" . $dayString . ") AND deal != ''"; 
+            }
+        
         print_r($dayArray);
         daySearch($sql);
         
@@ -188,9 +195,6 @@ function search($sql){ // Search Function
     $result = $mysqli->query($sql);   
     $array = array();
     $odd = true;
-        
-        $testing = $mysqli->query($sql);
-        print_r($testing);
     
     while($row = mysqli_fetch_assoc($result)){    
         $array[] = $row;
@@ -209,20 +213,14 @@ function search($sql){ // Search Function
         }
           
           echo "<td class='location'>" . $array[$i]['location'] . "</td>";
-          
+           // For Loop for Each Day Chosen
+          for ($j = 0; $j < count($dayArray); $j++){
+              
           echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
-          $i++;
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
-          $i++;
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
-          $i++;
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
-          $i++;
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
-          $i++;
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
-          $i++;
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+              $i++;
+              
+               } 
+          // |||||||||||||||||||||||||||||||||||||| //
         echo "</tr>";
         
         $odd = !$odd;
