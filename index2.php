@@ -80,10 +80,15 @@
         
     } elseif (isset($_GET['daySubmit'])) {
         
-        $dayArray = implode(", ", $_GET['day']);
-        echo $dayArray;
-        $sql = "SELECT * FROM deals WHERE day IN (" . $dayArray . ")"; 
+        $dayString = "'" . implode("', '", $_GET['day']) . "'"; //Turn Array into String for SQL Query
+        echo "dayString: " . $dayString; 
+        echo "<br>";
+        $sql = "SELECT * FROM deals WHERE day IN (" . $dayString . ") AND deal != ''";
+        $dayArray = explode("', '", $dayString); //Turn String back to Array for Search Func
+        echo "dayArray: ";
+        print_r($dayArray);
         daySearch($sql);
+        
         
     } else {
         
@@ -153,42 +158,45 @@ function search($sql){ // Search Function
         echo "</table>"; 
     } // If Results != 0
     
-    else {
-        // Format as Image Later //
+    else { // No Results Img
         echo "<img src='Images/noResults.png' class='noResults animated flipInX'>";
     }
     
 }; // Search Function
     
+    // Day Search Function //
     function daySearch($sql){ // Search Function
     include("connection.php");
     
     // Setting 'Today'
     date_default_timezone_set('EST');
     $today = date("N"); // Integer Representing Today
+       
+        global $dayArray; // Must declare to use outside var's
+        global $dayString;
+        echo "<table>
+                <tr class='headerWrap'>
+                <th class='headerLocation'>Location</th>";
+        
+        // Use the dayArray
+        for ($j = 0; $j < count($dayArray); $j++){
+            
+               echo "<th class='headerDay'>" . $dayArray[$j] . "</th>";
+        }
     
     // Query Database  
     $result = $mysqli->query($sql);   
     $array = array();
     $odd = true;
+        
+        $testing = $mysqli->query($sql);
+        print_r($testing);
     
     while($row = mysqli_fetch_assoc($result)){    
         $array[] = $row;
     };
 
     if ($result->num_rows !=0){
-    echo "<table>";
-        
-      echo "<tr class='headerWrap animated fadeInUp'>    
-            <th class='headerLocation'>Location</th>
-            <th class='headerDay'>Sunday</th>
-            <th class='headerDay'>Monday</th>
-            <th class='headerDay'>Tuesday</th>
-            <th class='headerDay'>Wednesday</th>
-            <th class='headerDay'>Thursday</th>
-            <th class='headerDay'>Friday</th>
-            <th class='headerDay'>Saturday</th>
-        </tr>";
         
       for ($i = 0; $i < count($array); $i++){
         
