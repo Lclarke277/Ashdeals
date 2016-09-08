@@ -51,15 +51,20 @@
     
     
 <?php 
-   include("connection.php");
+    // Setting 'Today'
+    date_default_timezone_set('EST');
+    $today = date("N"); // Integer Representing Today
+
 
     if (isset($_POST['locSubmit'])) {
         
         $sql = "SELECT * FROM deals WHERE location like '%" . $_POST['search'] . "%'";
+        search($sql);
     
     } elseif (isset($_POST['catSubmit'])) {
         
-        $sql = "SELECT * FROM deals WHERE catagory like '%" . $_POST['search'] . "%'";    
+        $sql = "SELECT * FROM deals WHERE catagory like '%" . $_POST['search'] . "%'"; 
+        search($sql);
         
     } else {
         
@@ -67,80 +72,62 @@
         
     };
     
+function search($sql){ 
    
+    include("connection.php");
+    
     // Query Database  
-    $result = $mysqli->query($sql);
-    $num_rows = ($result->num_rows) / 7;
+    $result = $mysqli->query($sql);   
+    $array = array();
+    $odd = true;
+    
+    while($row = mysqli_fetch_assoc($result)){    
+        $array[] = $row;
+    };
 
-
-    //Count the returned rows
     if ($result->num_rows !=0){
 
-    
-    echo "<div id='tableWrapper'>";
-    echo"<div id='tableScroll'>";
-         echo "<table>
-            <thead>
-            <tr class='odd'>
-                <th><span class='header'>Location</span></th>
-                <th><span class='header'>Sunday</span></th>
-                <th><span class='header'>Monday</span></th>
-                <th><span class='header'>Tuesday</span></th>
-                <th><span class='header'>Wednesday</span></th>
-                <th><span class='header'>Thursday</span></th>
-                <th><span class='header'>Friday</span></th>
-                <th><span class='header'>Saturday</span></th>
-            <thead>
-            </tr>";
+    echo "<table>";
         
+      for ($i = 0; $i < count($array); $i++){
         
-        $row = mysqli_fetch_array($result); 
+        if ($odd == true){
+        echo "<tr class='odd'>";
+        }
         
-
-        $i = 0; // Counter to append 'Odd' or 'Even' row class
-        
-        // Setting 'Today'
-        date_default_timezone_set('EST');
-        $today = date("N"); // Integer Representing Today
-        
-        do {
-            
-            // Loop To Append Even of Odd Classes to Rows
-            if ($i % 2 == 0) {
-                echo "<tr class='even animated flipInX'>";
-            }
-            
-            else {
-                echo "<tr class='odd animated flipInX'>";
-            }
-        
-        echo "<td class='location'><div><a href='" . $row['url'] . "'>" . $row['location'] . "</a></div></td>"; 
-        echo "<td class='deal 0'><div>" . $row['deal'] . "</div></td>";
-            $row = mysqli_fetch_array($result);
-        echo "<td class='deal 1'>" . $row['deal'] . "</div></td>";
-            $row = mysqli_fetch_array($result);        
-        echo "<td class='deal 2'>" . $row['deal'] . "</div></td>";
-            $row = mysqli_fetch_array($result);
-        echo "<td class='deal 3'>" . $row['deal'] . "</div></td>";
-            $row = mysqli_fetch_array($result);
-        echo "<td class='deal 4'>" . $row['deal'] . "</div></td>";
-            $row = mysqli_fetch_array($result);
-        echo "<td class='deal 5'>" . $row['deal'] . "</div></td>";
-            $row = mysqli_fetch_array($result);    
-        echo "<td class='deal 6'>" . $row['deal'] . "</div></td>";
-            $row = mysqli_fetch_array($result);
-    echo "</tr>";
-
-    $i++;
-    } while ($i < $num_rows);
+        else {
+        echo "<tr class='even'>";
+        }
+          
+          echo "<td class='location'>" . $array[$i]['location'] . "</td>";
+          
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          $i++;
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          $i++;
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          $i++;
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          $i++;
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          $i++;
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          $i++;
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
         echo "</tr>";
+          
+        $odd = !$odd;
+      };
         
-    } else { 
-        echo "No Results.";}
+     echo "</table>"; 
+    } // If Results != 0
     
-echo "</table>";
-echo "<div>"; //TableScroll
-echo "<div>"; //TableWrapper
+    else {
+        echo "<p class = 'noResults'>No Results</p>";
+    }
+    
+}; // Search Function
+      
     ?>
     
     <script type="text/javascript"> 
