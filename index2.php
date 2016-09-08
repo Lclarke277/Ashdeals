@@ -44,12 +44,24 @@
             <option value="Pizza">Pizza</option>
           </select>
         <input class='button hvr-shrink' type="submit" name="catSubmit" value="Search">
-    </form>
+      </form>
+    
+            <br>
+        <form method="get">
+          <input type="checkbox" name='day[]' value="Sunday">Sunday
+          <input type="checkbox" name='day[]' value="Monday">Monday
+          <input type="checkbox" name='day[]' value="Tuesday">Tuesday
+          <input type="checkbox" name='day[]' value="Wednesday">Wednesday
+          <input type="checkbox" name='day[]' value="Thursday">Thursday
+          <input type="checkbox" name='day[]' value="Friday">Friday
+          <input type="checkbox" name='day[]' value="Saturday">Saturday
+          <input class='button hvr-shrink' type="submit" name='daySubmit' value="Search">
+        </form>
     </div><br><!-- catForm -->
     </div><!-- forms -->
     </div><!-- header -->
     
-    
+
 <?php 
     // Setting 'Today'
     date_default_timezone_set('EST');
@@ -66,15 +78,25 @@
         $sql = "SELECT * FROM deals WHERE catagory like '%" . $_POST['search'] . "%'"; 
         search($sql);
         
+    } elseif (isset($_GET['daySubmit'])) {
+        
+        $dayArray = implode(", ", $_GET['day']);
+        echo $dayArray;
+        $sql = "SELECT * FROM deals WHERE day IN (" . $dayArray . ")"; 
+        daySearch($sql);
+        
     } else {
         
         $sql = "SELECT * FROM deals";
         
     };
     
-function search($sql){ 
-   
+function search($sql){ // Search Function
     include("connection.php");
+    
+    // Setting 'Today'
+    date_default_timezone_set('EST');
+    $today = date("N"); // Integer Representing Today
     
     // Query Database  
     $result = $mysqli->query($sql);   
@@ -86,17 +108,27 @@ function search($sql){
     };
 
     if ($result->num_rows !=0){
-
     echo "<table>";
+        
+      echo "<tr class='headerWrap animated fadeInUp'>    
+            <th class='headerLocation'>Location</th>
+            <th class='headerDay'>Sunday</th>
+            <th class='headerDay'>Monday</th>
+            <th class='headerDay'>Tuesday</th>
+            <th class='headerDay'>Wednesday</th>
+            <th class='headerDay'>Thursday</th>
+            <th class='headerDay'>Friday</th>
+            <th class='headerDay'>Saturday</th>
+        </tr>";
         
       for ($i = 0; $i < count($array); $i++){
         
         if ($odd == true){
-        echo "<tr class='odd'>";
+        echo "<tr class='odd animated flipInX'>";
         }
         
         else {
-        echo "<tr class='even'>";
+        echo "<tr class='even animated flipInX'>";
         }
           
           echo "<td class='location'>" . $array[$i]['location'] . "</td>";
@@ -115,15 +147,84 @@ function search($sql){
           $i++;
           echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
         echo "</tr>";
-          
+        
         $odd = !$odd;
       };
-        
-     echo "</table>"; 
+        echo "</table>"; 
     } // If Results != 0
     
     else {
-        echo "<p class = 'noResults'>No Results</p>";
+        // Format as Image Later //
+        echo "<img src='Images/noResults.png' class='noResults animated flipInX'>";
+    }
+    
+}; // Search Function
+    
+    function daySearch($sql){ // Search Function
+    include("connection.php");
+    
+    // Setting 'Today'
+    date_default_timezone_set('EST');
+    $today = date("N"); // Integer Representing Today
+    
+    // Query Database  
+    $result = $mysqli->query($sql);   
+    $array = array();
+    $odd = true;
+    
+    while($row = mysqli_fetch_assoc($result)){    
+        $array[] = $row;
+    };
+
+    if ($result->num_rows !=0){
+    echo "<table>";
+        
+      echo "<tr class='headerWrap animated fadeInUp'>    
+            <th class='headerLocation'>Location</th>
+            <th class='headerDay'>Sunday</th>
+            <th class='headerDay'>Monday</th>
+            <th class='headerDay'>Tuesday</th>
+            <th class='headerDay'>Wednesday</th>
+            <th class='headerDay'>Thursday</th>
+            <th class='headerDay'>Friday</th>
+            <th class='headerDay'>Saturday</th>
+        </tr>";
+        
+      for ($i = 0; $i < count($array); $i++){
+        
+        if ($odd == true){
+        echo "<tr class='odd animated flipInX'>";
+        }
+        
+        else {
+        echo "<tr class='even animated flipInX'>";
+        }
+          
+          echo "<td class='location'>" . $array[$i]['location'] . "</td>";
+          
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          $i++;
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          $i++;
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          $i++;
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          $i++;
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          $i++;
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          $i++;
+          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+        echo "</tr>";
+        
+        $odd = !$odd;
+      };
+        echo "</table>"; 
+    } // If Results != 0
+    
+    else {
+        // Format as Image Later //
+        echo "<img src='Images/noResults.png' class='noResults animated flipInX'>";
     }
     
 }; // Search Function
@@ -132,18 +233,9 @@ function search($sql){
     
     <script type="text/javascript"> 
         $(document).ready(function(){
-           // Add the 'Today' class to column of days that apply today
-           $('td.' + <?php echo $today ?>).addClass('today');
-        }); 
-       
-           // Append animated class when opjects enter view screen
-           // ViewPointChecker.js Copyright (c) 2014 Dirk Groenen
-        $(document).ready(function() {
-            $('.post').addClass("hidden").viewportChecker({
-                classToAdd: 'visible animated fadeIn',
-                offset: 100
-               });
-        });
+           if (<?php echo $i ?> == <?php echo $today ?> || (<?php echo $i - $today ?>) % 7 == 0){
+           $('td').addClass('today');
+        }}); 
     </script>
 
 </body>                                                               

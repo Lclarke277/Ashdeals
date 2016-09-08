@@ -2,7 +2,7 @@ html {
   min-width: 100%;
   min-height: 100%;
   background-position: top center;
-/*overflow: hidden; */
+ /* overflow: hidden; */
 }
 
 body {
@@ -68,10 +68,6 @@ p.search, form { /* Form Text */
 }
 
 
-td.location { /* Locations */
-    font-size: 20px;
-}
-
 a { /* Location Links */
     text-decoration: none;
     color: #081930;
@@ -80,16 +76,6 @@ a { /* Location Links */
 #catForm {
     display: inline;
     margin-left: 20px;
-}
-
-td {
-    font-family: 'Roboto Condensed', sans-serif;
-    text-align: center;
-}
-
-th {
-    font-family: 'Roboto Condensed', sans-serif;
-    background-color: #081930;
 }
 
 tr.odd {
@@ -128,11 +114,35 @@ tr.even:hover {
   transition-delay: 0s;
 }
 
+td, th.headerDay {
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: center;
+}
+
+td.location, th.headerLocation, th.headerDay { /* Locations */
+    font-size: 20px;
+}
+
+th.headerLocation, th.headerDay {
+    text-align: center;
+    font-family: 'Roboto Condensed', sans-serif;
+    padding: 10px 0;
+}
+
+tr.headerWrap { /* Table Header */
+    background-color: #E1E6EA;
+    width: 100%;
+}
+
 td.deal {
     height: 100px;
-    width: 10%;
+    width: 12%;
     text-align: left;
     padding: 10px;
+}
+
+td.location {
+    width: 15%;
 }
 
 td.today { /* Formatting Todays Deals */
@@ -154,26 +164,11 @@ td.today:hover {
    transition-delay: 0s; 
 }
 
-td.location {
-    width: 15%;
-}
-
-#tableWrapper {
-  position:relative;
-}
-
-#tableScroll { /*Table Header*/
-  height: 70vh; /*View Height*/
-  overflow:auto;  
-  margin-top:40px; 
-}
-
-#tableWrapper table thead th .header{ /* Header Text */
-  position:absolute;   
-  top:-25px;
-  z-index:2;
-  margin-left: -2%;
-  font-size: 20px;
+.noResults {
+    display: block;
+    max-width: 500px;
+    width: 40%;
+    margin: 10% auto;
 }
 
 /* For ViewPointChecker.js */
