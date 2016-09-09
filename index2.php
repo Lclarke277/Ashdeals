@@ -45,19 +45,20 @@
           </select>
         <input class='button hvr-shrink' type="submit" name="catSubmit" value="Search">
       </form>
+    </div><br><!-- catForm -->
     
-            <br>
+    <div id='dayForm'>
         <form method="get">
-          <input type="checkbox" name='day[]' value="Sunday">Sunday
-          <input type="checkbox" name='day[]' value="Monday">Monday
-          <input type="checkbox" name='day[]' value="Tuesday">Tuesday
-          <input type="checkbox" name='day[]' value="Wednesday">Wednesday
-          <input type="checkbox" name='day[]' value="Thursday">Thursday
-          <input type="checkbox" name='day[]' value="Friday">Friday
-          <input type="checkbox" name='day[]' value="Saturday">Saturday
+          <input type="checkbox" name='day[]' id='day1' value="Sunday"><label for='day1'>Sunday</label>
+          <input type="checkbox" name='day[]' id='day2' value="Monday"><label for='day2'>Monday</label>
+          <input type="checkbox" name='day[]' id='day3' value="Tuesday"><label for='day3'>Tuesday</label>
+          <input type="checkbox" name='day[]' id='day4' value="Wednesday"><label for='day4'>Wednesday</label>
+          <input type="checkbox" name='day[]' id='day5' value="Thursday"><label for='day5'>Thursday</label>
+          <input type="checkbox" name='day[]' id='day6' value="Friday"><label for='day6'>Friday</label>
+          <input type="checkbox" name='day[]' id='day7' value="Saturday"><label for='day7'>Saturday</label>
           <input class='button hvr-shrink' type="submit" name='daySubmit' value="Search">
         </form>
-    </div><br><!-- catForm -->
+    </div><!-- dayForm -->
     </div><!-- forms -->
     </div><!-- header -->
     
@@ -119,7 +120,8 @@
         
     };
     
-function search($sql){ // Search Function
+    // Search Function //
+function search($sql){ 
     include("connection.php");
     
     // Setting 'Today'
@@ -140,13 +142,13 @@ function search($sql){ // Search Function
         
       echo "<tr class='headerWrap animated fadeInUp'>    
             <th class='headerLocation'>Location</th>
-            <th class='headerDay'>Sunday</th>
-            <th class='headerDay'>Monday</th>
-            <th class='headerDay'>Tuesday</th>
-            <th class='headerDay'>Wednesday</th>
-            <th class='headerDay'>Thursday</th>
-            <th class='headerDay'>Friday</th>
-            <th class='headerDay'>Saturday</th>
+            <th class='headerDay 0'>Sunday</th>
+            <th class='headerDay 1'>Monday</th>
+            <th class='headerDay 2'>Tuesday</th>
+            <th class='headerDay 3'>Wednesday</th>
+            <th class='headerDay 4'>Thursday</th>
+            <th class='headerDay 5'>Friday</th>
+            <th class='headerDay 6'>Saturday</th>
         </tr>";
         
       for ($i = 0; $i < count($array); $i++){
@@ -161,19 +163,19 @@ function search($sql){ // Search Function
           
           echo "<td class='location'>" . $array[$i]['location'] . "</td>";
           
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 0'>" . $array[$i]['deal'] . "</td>";
           $i++;
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 1'>" . $array[$i]['deal'] . "</td>";
           $i++;
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 2'>" . $array[$i]['deal'] . "</td>";
           $i++;
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 3'>" . $array[$i]['deal'] . "</td>";
           $i++;
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 4'>" . $array[$i]['deal'] . "</td>";
           $i++;
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 5'>" . $array[$i]['deal'] . "</td>";
           $i++;
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 6'>" . $array[$i]['deal'] . "</td>";
         echo "</tr>";
         
         $odd = !$odd;
@@ -254,9 +256,9 @@ function search($sql){ // Search Function
    
     <script type="text/javascript"> 
         $(document).ready(function(){
-           if (<?php echo $i ?> == <?php echo $today ?> || (<?php echo $i - $today ?>) % 7 == 0){
-           $('td').addClass('today');
-        }}); 
+           // Add the 'Today' class to column of days that apply today
+           $("." + <?php echo $today ?>).addClass('today');
+        });  
     </script> 
 
 </body>                                                               
