@@ -67,33 +67,46 @@
     date_default_timezone_set('EST');
     $today = date("N"); // Integer Representing Today
     
+    // Location Search //
     if (isset($_POST['locSubmit'])) {
         
         //$sql = "SELECT * FROM deals WHERE day IN ('Monday')";
         $sql = "SELECT * FROM deals WHERE location like '%" . $_POST['search'] . "%'";
         search($sql);
     
+    // Category Search //
     } elseif (isset($_POST['catSubmit'])) {
         
         $sql = "SELECT * FROM deals WHERE catagory like '%" . $_POST['search'] . "%'"; 
         search($sql);
-        
+    
+    // Day Search //
     } elseif (isset($_GET['daySubmit'])) {
         
-        $dayString = "'" . implode("', '", $_GET['day']) . "'"; //Turn Array into String for SQL Query
-        echo "dayString: " . $dayString . "<br>";
+        if (count($_GET['daySubmit']) < 0){
+            echo "DAMN"; }
+        
+        $dayArray = $_GET['day']; // Array Of Selected Days
+        $dayString = "'" . implode("', '", $dayArray) . "'"; //Turn Array into String for SQL Query
+        
+        //echo "dayString: " . $dayString . "<br>";
         //echo "<br>";
-        $dayArray = explode("', '", $dayString); //Turn String back to Array for Search Func
+    
         
             if (count($dayArray) > 1) {
                 $sql = "SELECT * FROM deals WHERE day IN (" . $dayString . ")";
             }
-
-            else {
-            $sql = "SELECT * FROM deals WHERE day IN (" . $dayString . ") AND deal != ''"; 
+        
+            elseif (count($datArray = 1)) { // Makes Sure not to show empty string
+                $sql = "SELECT * FROM deals WHERE day IN (" . $dayString . ") AND deal != ''"; 
+                }
+            
+            else { // No Results Error Check
+                $sql = "SELECT * FROM deals";
+                search($sql);
             }
         
-        print_r($dayArray);
+        //print_r($dayArray);
         daySearch($sql);
         
         
@@ -182,7 +195,7 @@ function search($sql){ // Search Function
         global $dayArray; // Must declare to use outside var's
         global $dayString;
         echo "<table>
-                <tr class='headerWrap'>
+                <tr class='headerWrap animated fadeInUp'>
                 <th class='headerLocation'>Location</th>";
         
         // Use the dayArray
@@ -218,9 +231,8 @@ function search($sql){ // Search Function
               
           echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
               $i++;
-              
-               } 
-          // |||||||||||||||||||||||||||||||||||||| //
+              } // For Loop
+
         echo "</tr>";
         
         $odd = !$odd;
@@ -236,13 +248,13 @@ function search($sql){ // Search Function
 }; // Search Function
       
     ?>
-    
+   
     <script type="text/javascript"> 
         $(document).ready(function(){
            if (<?php echo $i ?> == <?php echo $today ?> || (<?php echo $i - $today ?>) % 7 == 0){
            $('td').addClass('today');
         }}); 
-    </script>
+    </script> 
 
 </body>                                                               
 </html>
