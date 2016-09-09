@@ -83,8 +83,7 @@
     // Day Search //
     } elseif (isset($_GET['daySubmit'])) {
         
-        if (count($_GET['daySubmit']) < 0){
-            echo "DAMN"; }
+        if (isset($_GET['day'])){
         
         $dayArray = $_GET['day']; // Array Of Selected Days
         $dayString = "'" . implode("', '", $dayArray) . "'"; //Turn Array into String for SQL Query
@@ -92,7 +91,6 @@
         //echo "dayString: " . $dayString . "<br>";
         //echo "<br>";
     
-        
             if (count($dayArray) > 1) {
                 $sql = "SELECT * FROM deals WHERE day IN (" . $dayString . ")";
             }
@@ -108,9 +106,14 @@
         
         //print_r($dayArray);
         daySearch($sql);
+        } // If isset
         
+        else {
+           $sql = "SELECT * FROM deals";
+           search($sql); 
+        }
         
-    } else {
+    } else { // Last Call AKA No Input
         
         $sql = "SELECT * FROM deals";
         
@@ -227,7 +230,7 @@ function search($sql){ // Search Function
           
           echo "<td class='location'>" . $array[$i]['location'] . "</td>";
            // For Loop for Each Day Chosen
-          for ($j = 0; $j < count($dayArray); $j++){
+          for ($j = 0; $j < count($dayArray); $j++){      
               
           echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
               $i++;
