@@ -88,9 +88,6 @@
         
         $dayArray = $_GET['day']; // Array Of Selected Days
             
-            echo "dayArray: ";
-            print_r($dayArray);
-            
         $dayString = "'" . implode("', '", $dayArray) . "'"; //Turn Array into 
     
             if (count($dayArray) > 1) {
@@ -240,7 +237,6 @@ function search($sql){
            // For Loop for Each Day Chosen
              for ($j = 0; $j < count($dayArray) - 1; $j++){
               
-                 echo ($array[$i]['day']);
               echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
                  $i++;
                 } // For Loop
@@ -264,8 +260,12 @@ function search($sql){
    
     <script type="text/javascript"> 
         $(document).ready(function(){
-           // Add the 'Today' class to column of days that apply today
+           // Add the 'Today' class to day header
            $("." + <?php echo $today ?>).addClass('today');
+            
+           // Add the 'Today' class to the deals of Today     
+           var i = $('.today').index() + 1;
+           $("td:nth-child(" + i + ")").addClass('today');
         });  
     </script> 
 
