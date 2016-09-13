@@ -87,22 +87,22 @@
         if (isset($_GET['day'])){
         
         $dayArray = $_GET['day']; // Array Of Selected Days
-        $dayString = "'" . implode("', '", $dayArray) . "'"; //Turn Array into String for SQL Query
-        
-        //echo "dayString: " . $dayString . "<br>";
-        //echo "<br>";
+            
+            echo "dayArray: ";
+            print_r($dayArray);
+            
+        $dayString = "'" . implode("', '", $dayArray) . "'"; //Turn Array into 
     
             if (count($dayArray) > 1) {
                 $sql = "SELECT * FROM deals WHERE day IN (" . $dayString . ")";
             }
         
-            elseif (count($datArray = 1)) { // Makes Sure not to show empty string
+            elseif (count($dayArray == 1)) { // Makes Sure not to show empty string
                 $sql = "SELECT * FROM deals WHERE day IN (" . $dayString . ") AND deal != ''"; 
                 }
             
             else { // No Results Error Check
                 $sql = "SELECT * FROM deals";
-                search($sql);
             }
         
         //print_r($dayArray);
@@ -120,7 +120,7 @@
         
     };
     
-    // Search Function //
+    // Search Function
 function search($sql){ 
     include("connection.php");
     
@@ -195,7 +195,7 @@ function search($sql){
     
     // Setting 'Today'
     date_default_timezone_set('EST');
-    $today = date("N"); // Integer Representing Today
+    $today = date("l"); // Integer Representing Today
        
         global $dayArray; // Must declare to use outside var's
         global $dayString;
@@ -203,12 +203,17 @@ function search($sql){
                 <tr class='headerWrap animated fadeInUp'>
                 <th class='headerLocation'>Location</th>";
         
-        // Use the dayArray
+        // Create the headers for each day selected
         for ($j = 0; $j < count($dayArray); $j++){
-            
-               echo "<th class='headerDay'>" . $dayArray[$j] . "</th>";
+            if ($dayArray[$j] == $today){
+               echo "<th class='headerDay today'>" . $dayArray[$j] . "</th>";
+            }
+            else {
+                echo "<th class='headerDay'>" . $dayArray[$j] . "</th>";
+            }
         }
-    
+    echo "</tr>";
+        
     // Query Database  
     $result = $mysqli->query($sql);   
     $array = array();
@@ -221,24 +226,28 @@ function search($sql){
     if ($result->num_rows !=0){
         
       for ($i = 0; $i < count($array); $i++){
-        
+        // Creating Odd and Even Classes
         if ($odd == true){
         echo "<tr class='odd animated flipInX'>";
-        }
-        
-        else {
+            
+        } else {
         echo "<tr class='even animated flipInX'>";
-        }
+        } // End Odd & Even
           
           echo "<td class='location'>" . $array[$i]['location'] . "</td>";
            // For Loop for Each Day Chosen
-          for ($j = 0; $j < count($dayArray); $j++){      
-              
-          echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
-              $i++;
+              for ($j = 0; $j < count($dayArray); $j++){
+                  
+                  if ($array[$i]['day'] == $today){
+              echo "<td class='deal today'>" . $array[$i]['deal'] . "</td>";
+                      $j++;
+                  } else {
+              echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+                  }
+                  $i++;
               } // For Loop
 
-        echo "</tr>";
+            echo "</tr>";
         
         $odd = !$odd;
       };
@@ -248,8 +257,7 @@ function search($sql){
     else {
         // Format as Image Later //
         echo "<img src='Images/noResults.png' class='noResults animated flipInX'>";
-    }
-    
+    } 
 }; // Search Function
       
     ?>
