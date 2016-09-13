@@ -226,6 +226,7 @@ function search($sql){
     if ($result->num_rows !=0){
         
       for ($i = 0; $i < count($array); $i++){
+          //echo ($array['deal']);
         // Creating Odd and Even Classes
         if ($odd == true){
         echo "<tr class='odd animated flipInX'>";
@@ -235,17 +236,16 @@ function search($sql){
         } // End Odd & Even
           
           echo "<td class='location'>" . $array[$i]['location'] . "</td>";
+     
            // For Loop for Each Day Chosen
-              for ($j = 0; $j < count($dayArray); $j++){
-                  
-                  if ($array[$i]['day'] == $today){
-              echo "<td class='deal today'>" . $array[$i]['deal'] . "</td>";
-                      $j++;
-                  } else {
+             for ($j = 0; $j < count($dayArray) - 1; $j++){
+              
+                 echo ($array[$i]['day']);
               echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
-                  }
-                  $i++;
-              } // For Loop
+                 $i++;
+                } // For Loop
+            
+            echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
 
             echo "</tr>";
         
