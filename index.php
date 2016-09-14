@@ -62,12 +62,11 @@
     </div><!-- forms -->
     </div><!-- header -->
     
-
 <?php 
     // Setting 'Today'
     date_default_timezone_set('EST');
     $today = date("N"); // Integer Representing Today
-    
+   
     // Location Search //
     if (isset($_POST['locSubmit'])) {
         
