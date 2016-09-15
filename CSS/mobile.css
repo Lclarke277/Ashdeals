@@ -1,8 +1,8 @@
 html {
   min-width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   background-position: top center;
- /* overflow: hidden; */
+  overflow: hidden; 
 }
 
 body {
@@ -17,35 +17,72 @@ body {
     padding: 10px 10px;
 }
 
+#logoMain {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    margin-bottom: 5px;
+}
+
+#locForm {
+    display: block;
+}
+
 .button { /* Form Submit Buttons */
+    width: 20%;
+    text-align: center;
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 20px;
-    padding: 6px 10px;
+    font-size: 40px;
+    padding: 7px 5px;
+    margin-left: 10px;
+    margin-bottom: 20px;
     border: none;
     border-radius: 4px;
     background-color: white;
     color: black;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .formField { /* Form Fields */
-    width: 12%;
+    text-align: center;
+    width: 70%;
+    height: 60px;
+    margin: 10px auto;
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 20px;
+    font-size: 40px;
     color: white;
-    padding: 5px 10px;
-    border: 2px solid white;
-    border-radius: 3px;
-    margin-bottom: 5px;
-    margin-left: 10px;
+    border: 3px solid white;
+    border-radius: 5px;
     background: transparent;
     -webkit-transition: 1s;
     transition:  1s;
 }
 
+#daySubmit {
+    margin-top: -27px;
+}
+
+#forms {
+    text-align: center;
+}
+
 input.formField:focus { /* Location */
-    background-color: rgba(0,0, 0, 0.5);
-    width: 15%
+    background-color: rgba(0,0, 0, 0.7);
+}
+
+input[type="checkbox"] {
+    display: none;  
+}
+
+input[type="checkbox"]:checked + label {
+    background-color: #827258;
+    color: white;
+    -webkit-transition: width 1s ease;
+    -moz-transition: width 1s ease;
+    -o-transition: width 1s ease;
+    -ms-transition: width 1s ease;
+    transition: width 1s ease;
 }
 
 select.formField:focus { /* Drop-Down */
@@ -56,17 +93,40 @@ option {
     background-color: #827258;
 }
 
+label {
+    width: 5%;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 40px;
+    cursor: pointer;
+    color: white;
+    background-color: RGBa(0, 0, 0, 0.3);
+    padding: 4px 10px;
+    border: 3px solid white;
+    border-radius: 5px;
+    margin: 5px 5px 0 5px;
+    -webkit-transition: .5s all;   
+    -moz-transition: .5s all;   
+    -ms-transition: .5s all;   
+    -o-transition: .5s all;   
+    transition: .5s all; 
+}
+
+label:hover {
+  background-color: RGBa(0, 0, 0, 0.6);
+  -webkit-transition-delay: 0s;
+  -moz-transition-delay: 0s;
+  -ms-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  transition-delay: 0s;
+}
+
 p.search, form { /* Form Text */
     display: inline;
     font-family: 'Roboto Condensed', sans-serif;
     color: white;
-    font-size: 25px;
+    font-size: 20px;
 }
-
-#logoMain {
-    width: 30%;
-}
-
 
 a { /* Location Links */
     text-decoration: none;
@@ -75,7 +135,10 @@ a { /* Location Links */
 
 #catForm {
     display: inline;
-    margin-left: 20px;
+}
+
+#dayForm {
+    width: 100%;
 }
 
 tr.odd {
@@ -117,10 +180,11 @@ tr.even:hover {
 td, th.headerDay {
     font-family: 'Roboto Condensed', sans-serif;
     text-align: center;
+    font-size: 25px;
 }
 
 td.location, th.headerLocation, th.headerDay { /* Locations */
-    font-size: 20px;
+    font-size: 30px;
 }
 
 th.headerLocation, th.headerDay {
@@ -129,9 +193,18 @@ th.headerLocation, th.headerDay {
     padding: 10px 0;
 }
 
+th.headerLocation {
+    width: 15%;
+}
+
+th.headerDay {
+    width: 12%;
+}
+
 tr.headerWrap { /* Table Header */
     background-color: #E1E6EA;
     width: 100%;
+    padding-right: 15px;
 }
 
 td.deal {
@@ -145,7 +218,7 @@ td.location {
     width: 15%;
 }
 
-td.today { /* Formatting Todays Deals */
+.today { /* Formatting Todays Deals */
     background-color: #827258;
     color: white;
    -webkit-transition: .5s all;   
@@ -155,7 +228,7 @@ td.today { /* Formatting Todays Deals */
    transition: .5s all;
 }
 
-td.today:hover {
+.today:hover {
    background-color: #998566;
    -webkit-transition-delay: 0s;
    -moz-transition-delay: 0s;
@@ -175,6 +248,38 @@ td.today:hover {
 .hidden{
      opacity: 0;
 }
+
 .visible{
      opacity: 1;
+}
+
+div.tableContainer {
+	clear: both;
+	height: 1000px;
+	overflow: auto;
+}
+
+html>body div.tableContainer {
+	overflow: hidden;
+}
+
+thead.fixedHeader tr {
+	position: relative;
+}
+
+body tbody.scrollContent {
+	display: block;
+	height: 70vh;
+	overflow: auto;
+    width: 100vw;
+}
+
+body thead.fixedHeader {
+	display: inline-table;
+	overflow: auto;
+	width: 100vw;
+    margin-right: 5px;
+}
+.scrollTable {
+    width: 100%;
 }

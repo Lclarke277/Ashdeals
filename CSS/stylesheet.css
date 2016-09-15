@@ -1,8 +1,8 @@
 html {
   min-width: 100%;
-  min-height: 100%;
+  min-height: 100vh;
   background-position: top center;
- /* overflow: hidden; */
+  overflow: hidden; 
 }
 
 body {
@@ -21,6 +21,10 @@ body {
     display: block;
     width: 30%;
     margin-bottom: 5px;
+}
+
+#catForm {
+    display: inline;
 }
 
 .button { /* Form Submit Buttons */
@@ -170,9 +174,18 @@ th.headerLocation, th.headerDay {
     padding: 10px 0;
 }
 
+th.headerLocation {
+    width: 15%;
+}
+
+th.headerDay {
+    width: 12%;
+}
+
 tr.headerWrap { /* Table Header */
     background-color: #E1E6EA;
     width: 100%;
+    padding-right: 15px;
 }
 
 td.deal {
@@ -218,4 +231,36 @@ td.location {
 }
 .visible{
      opacity: 1;
+}
+
+/* Table Scroll w/ Locked Header */
+div.tableContainer {
+	clear: both;
+	height: 1000px;
+	overflow: auto;
+}
+
+html>body div.tableContainer {
+	overflow: hidden;
+}
+
+thead.fixedHeader tr {
+	position: relative;
+}
+
+body tbody.scrollContent {
+	display: block;
+	height: 70vh;
+	overflow: auto;
+    width: 100%;
+}
+
+body thead.fixedHeader {
+	display: inline-table;
+	overflow: auto;
+	width: 99%;
+    margin-right: 15px;
+}
+.scrollTable {
+    width: 100%;
 }
