@@ -20,7 +20,7 @@ body {
 #logoMain {
     display: block;
     margin: 0 auto;
-    width: 90%;
+    width: 80%;
     margin-bottom: 5px;
 }
 
@@ -180,11 +180,11 @@ tr.even:hover {
 td, th.headerDay {
     font-family: 'Roboto Condensed', sans-serif;
     text-align: center;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 td.location, th.headerLocation, th.headerDay { /* Locations */
-    font-size: 30px;
+    font-size: 35px;
 }
 
 th.headerLocation, th.headerDay {

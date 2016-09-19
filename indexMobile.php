@@ -5,13 +5,7 @@
         <link rel='icon' type='image/png' href ='Images/small.png'>
         <meta charset = "UTF-8">
         
-        <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
-        <!--
-        media='screen and (min-width: 1100px)'
-        <link rel="stylesheet" media='screen and (min-width: 700px) and (max-width: 1099px)'  href="CSS/mobileMD.css">
-        
-        <link rel="stylesheet" media='screen and (max-width: 699px)'  href="CSS/mobileSM.css">
-        -->
+        <link rel="stylesheet" type="text/css" href="CSS/isMobile.css">
         <link rel="stylesheet" type="text/css" href="CSS/animate.css">
         <link rel="stylesheet" type="text/css" href="CSS/hover.css">
         <script src="viewportchecker.js"></script>   
@@ -69,11 +63,7 @@
     // MobileDetect.net for detecting device
     require_once 'Mobile_Detect.php';
     $detect = new Mobile_Detect;
-    
-    if ( $detect->isMobile() ) {
- header('Location: indexMobile.php');
-    }
-    
+
     // Setting 'Today'
     date_default_timezone_set('EST');
     $today = date("N"); // Integer Representing Today
@@ -283,16 +273,14 @@ function search($sql){
    
     <script type="text/javascript"> 
         $(document).ready(function(){
-            
             // X-Scroll for Mobile
             $(".scrollContent").scroll(function ()
             {   
                 $(".fixedHeader").offset({ left: -1*this.scrollLeft });
             });
             
-           // Match header width to table width   
-           // ONLY RUN ON MOBILE       
-           //$(".fixedHeader").width($('.odd').width());
+           // Match header width to table width         
+           $(".fixedHeader").width($('.odd').width());
             
            // Add the 'Today' class to day header
            $("." + <?php echo $today ?>).addClass('today');

@@ -5,10 +5,6 @@ html {
   overflow: hidden; 
 }
 
-#page {
-    background-color: blue;
-}
-
 body {
     margin: 0;
     padding: 0;
@@ -23,44 +19,57 @@ body {
 
 #logoMain {
     display: block;
-    width: 30%;
+    margin: 0 auto;
+    width: 80%;
     margin-bottom: 5px;
 }
 
-#catForm {
-    display: inline;
+#locForm {
+    display: block;
 }
 
 .button { /* Form Submit Buttons */
+    width: 40%;
+    text-align: center;
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 20px;
-    padding: 3px 10px;
-    margin: 0 0 5px 5px;
+    font-size: 40px;
+    padding: 7px 5px;
+    margin-left: 10px;
+    margin-bottom: 20px;
     border: none;
     border-radius: 4px;
     background-color: white;
     color: black;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .formField { /* Form Fields */
-    width: 12%;
+    text-align: center;
+    width: 50%;
+    height: 60px;
+    margin: 10px auto;
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 20px;
+    font-size: 40px;
     color: white;
-    padding: 3px 10px;
-    border: 2px solid white;
+    border: 3px solid white;
     border-radius: 5px;
-    margin-bottom: 10px;
-    margin-left: 5px;
     background: transparent;
     -webkit-transition: 1s;
     transition:  1s;
 }
 
+#daySubmit {
+    margin-top: 10px;
+    width: 90%;
+}
+
+#forms {
+    text-align: center;
+}
+
 input.formField:focus { /* Location */
-    background-color: rgba(0,0, 0, 0.5);
-    width: 15%
+    background-color: rgba(0,0, 0, 0.7);
 }
 
 input[type="checkbox"] {
@@ -85,15 +94,18 @@ option {
     background-color: #827258;
 }
 
-label {
-    font-size: 20px;
+label { /* Day CheckBox */
+    width: 3.7%;
+    overflow: hidden;
+    display: inline-block;
+    font-size: 40px;
     cursor: pointer;
     color: white;
     background-color: RGBa(0, 0, 0, 0.3);
     padding: 4px 10px;
-    border: 2px solid white;
+    border: 3px solid white;
     border-radius: 5px;
-    margin: 5px 0 0 5px;
+    margin: 5px 5px 0 5px;
     -webkit-transition: .5s all;   
     -moz-transition: .5s all;   
     -ms-transition: .5s all;   
@@ -124,7 +136,10 @@ a { /* Location Links */
 
 #catForm {
     display: inline;
-    margin-left: 20px;
+}
+
+#dayForm {
+    width: 100%;
 }
 
 tr.odd {
@@ -166,10 +181,11 @@ tr.even:hover {
 td, th.headerDay {
     font-family: 'Roboto Condensed', sans-serif;
     text-align: center;
+    font-size: 30px;
 }
 
 td.location, th.headerLocation, th.headerDay { /* Locations */
-    font-size: 20px;
+    font-size: 35px;
 }
 
 th.headerLocation, th.headerDay {
@@ -233,11 +249,11 @@ td.location {
 .hidden{
      opacity: 0;
 }
+
 .visible{
      opacity: 1;
 }
 
-/* Table Scroll w/ Locked Header */
 div.tableContainer {
 	clear: both;
 	height: 1000px;
@@ -256,14 +272,14 @@ body tbody.scrollContent {
 	display: block;
 	height: 70vh;
 	overflow: auto;
-    width: 100%;
+    width: 100vw;
 }
 
 body thead.fixedHeader {
 	display: inline-table;
 	overflow: auto;
-	width: 99%;
-    margin-right: 15px;
+	width: 100vw;
+    margin-right: 5px;
 }
 .scrollTable {
     width: 100%;
