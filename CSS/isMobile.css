@@ -95,7 +95,7 @@ option {
 }
 
 label { /* Day CheckBox */
-    width: 3.7%;
+    width: 4%;
     overflow: hidden;
     display: inline-block;
     font-size: 40px;
@@ -142,6 +142,11 @@ a { /* Location Links */
     width: 100%;
 }
 
+table {
+    table-layout: fixed;
+    width: 200px;
+}
+
 tr.odd {
    background-color: #F0F0F0; 
    -webkit-transition: .5s all;   
@@ -181,11 +186,14 @@ tr.even:hover {
 td, th.headerDay {
     font-family: 'Roboto Condensed', sans-serif;
     text-align: center;
-    font-size: 30px;
 }
 
 td.location, th.headerLocation, th.headerDay { /* Locations */
     font-size: 35px;
+}
+
+td.deal {
+    font-size: 30px;
 }
 
 th.headerLocation, th.headerDay {
@@ -216,7 +224,7 @@ td.deal {
 }
 
 td.location {
-    width: 15%;
+    width: auto;
 }
 
 .today { /* Formatting Todays Deals */
@@ -249,11 +257,15 @@ td.location {
 .hidden{
      opacity: 0;
 }
-
 .visible{
      opacity: 1;
 }
 
+table {
+    table-layout: auto;
+}
+
+/* Table Scroll w/ Locked Header */
 div.tableContainer {
 	clear: both;
 	height: 1000px;
@@ -261,7 +273,7 @@ div.tableContainer {
 }
 
 html>body div.tableContainer {
-	overflow: hidden;
+	overflow: auto;
 }
 
 thead.fixedHeader tr {
@@ -272,15 +284,15 @@ body tbody.scrollContent {
 	display: block;
 	height: 70vh;
 	overflow: auto;
-    width: 100vw;
+    width: 100%;
 }
 
 body thead.fixedHeader {
 	display: inline-table;
 	overflow: auto;
-	width: 100vw;
-    margin-right: 5px;
+	width: 100%;
 }
+
 .scrollTable {
     width: 100%;
 }

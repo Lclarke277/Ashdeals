@@ -141,13 +141,13 @@ function search($sql){
      echo "<thead class='fixedHeader'>";
       echo "<tr class='headerWrap animated fadeInUp'>    
             <th class='headerLocation'>Location</th>
-            <th class='headerDay 0'>Sunday</th>
-            <th class='headerDay 1'>Monday</th>
-            <th class='headerDay 2'>Tuesday</th>
-            <th class='headerDay 3'>Wednesday</th>
-            <th class='headerDay 4'>Thursday</th>
-            <th class='headerDay 5'>Friday</th>
-            <th class='headerDay 6'>Saturday</th>
+            <th class='headerDay 0'>Sun</th>
+            <th class='headerDay 1'>Mon</th>
+            <th class='headerDay 2'>Tue</th>
+            <th class='headerDay 3'>Wed</th>
+            <th class='headerDay 4'>Thu</th>
+            <th class='headerDay 5'>Fri</th>
+            <th class='headerDay 6'>Sat</th>
         </tr>
     </thead>
     
@@ -165,19 +165,19 @@ function search($sql){
           
           echo "<td class='location'>" . $array[$i]['location'] . "</td>";
           
-          echo "<td class='deal 0'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 0'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
           $i++;
-          echo "<td class='deal 1'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 1'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
           $i++;
-          echo "<td class='deal 2'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 2'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
           $i++;
-          echo "<td class='deal 3'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 3'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
           $i++;
-          echo "<td class='deal 4'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 4'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
           $i++;
-          echo "<td class='deal 5'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 5'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
           $i++;
-          echo "<td class='deal 6'>" . $array[$i]['deal'] . "</td>";
+          echo "<td class='deal 6'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
         echo "</tr>";
         
         $odd = !$odd;
@@ -212,10 +212,10 @@ function search($sql){
         // Create the headers for each day selected
         for ($j = 0; $j < count($dayArray); $j++){
             if ($dayArray[$j] == $today){
-               echo "<th class='headerDay today'>" . $dayArray[$j] . "</th>";
+               echo "<th class='headerDay today'>" . substr("" . $dayArray[$j] . "", 0, 3) . "</th>";
             }
             else {
-                echo "<th class='headerDay'>" . $dayArray[$j] . "</th>";
+                echo "<th class='headerDay'>" . substr("" . $dayArray[$j] . "", 0, 3) . "</th>";
             }
         }
         echo "</thead>";
@@ -248,7 +248,7 @@ function search($sql){
            // For Loop for Each Day Chosen
              for ($j = 0; $j < count($dayArray) - 1; $j++){
               
-              echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
+              echo "<td class='deal'>" . substr(" " . $array[$i]['deal'] ." ", 0, 40) . "...</td>";
                  $i++;
                 } // For Loop
             
@@ -273,14 +273,9 @@ function search($sql){
    
     <script type="text/javascript"> 
         $(document).ready(function(){
-            // X-Scroll for Mobile
-            $(".scrollContent").scroll(function ()
-            {   
-                $(".fixedHeader").offset({ left: -1*this.scrollLeft });
-            });
             
-           // Match header width to table width         
-           $(".fixedHeader").width($('.odd').width());
+           $("td.deal").width($("th.headerDay").width());
+           $("td.location").width($("th.headerLocation").width());
             
            // Add the 'Today' class to day header
            $("." + <?php echo $today ?>).addClass('today');

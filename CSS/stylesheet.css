@@ -245,7 +245,7 @@ div.tableContainer {
 }
 
 html>body div.tableContainer {
-	overflow: hidden;
+	overflow: auto;
 }
 
 thead.fixedHeader tr {
@@ -263,7 +263,7 @@ body thead.fixedHeader {
 	display: inline-table;
 	overflow: auto;
 	width: 99%;
-    margin-right: 15px;
+    margin-right: 10px;
 }
 .scrollTable {
     width: 100%;
