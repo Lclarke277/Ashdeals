@@ -165,19 +165,19 @@ function search($sql){
           
           echo "<td class='location'>" . $array[$i]['location'] . "</td>";
           
-          echo "<td class='deal 0'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
+          echo "<td class='deal 0'>" . $array[$i]['deal'] . "</td>";
           $i++;
-          echo "<td class='deal 1'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
+          echo "<td class='deal 1'>" . $array[$i]['deal'] . "</td>";
           $i++;
-          echo "<td class='deal 2'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
+          echo "<td class='deal 2'>" . $array[$i]['deal'] . "</td>";
           $i++;
-          echo "<td class='deal 3'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
+          echo "<td class='deal 3'>" . $array[$i]['deal'] ."</td>";
           $i++;
-          echo "<td class='deal 4'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
+          echo "<td class='deal 4'>" . $array[$i]['deal'] . "</td>";
           $i++;
-          echo "<td class='deal 5'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
+          echo "<td class='deal 5'>" . $array[$i]['deal'] . "</td>";
           $i++;
-          echo "<td class='deal 6'>" . substr(" " . $array[$i]['deal'] ." ", 0, 50) . "...</td>";
+          echo "<td class='deal 6'>" . $array[$i]['deal'] . "</td>";
         echo "</tr>";
         
         $odd = !$odd;
@@ -248,7 +248,7 @@ function search($sql){
            // For Loop for Each Day Chosen
              for ($j = 0; $j < count($dayArray) - 1; $j++){
               
-              echo "<td class='deal'>" . substr(" " . $array[$i]['deal'] ." ", 0, 40) . "...</td>";
+              echo "<td class='deal'>" . $array[$i]['deal'] . "</td>";
                  $i++;
                 } // For Loop
             
