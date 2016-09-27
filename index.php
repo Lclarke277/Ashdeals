@@ -25,7 +25,7 @@
     <img id='logoMain' src='Images/logo.png'>
     
 <!-- Mail Pop-Up -->
-<input type='image' src="Images/contact.png" id='myBtn'>
+<input type='image' src="Images/contact.png" id='myBtn' class='hvr-wobble-vertical'>
 
 <!-- The Modal -->
 <div id="myModal" class="modal">
@@ -45,10 +45,10 @@
       <?php 
         if(isset($_POST['contactSubmit'])) {
             $name = $_POST['name'];
-            $subject = $_POST['subject'];
+            $subject = "New Ashdeals.us Email";
             $email = $_POST['email'];
-            $message = $_POST['message'];
-            $header = "From: noreply@example.com\r\n"; 
+            $message = "Name: " . $name . "\r\n" . $_POST['message'];
+            $header = "From: " . $email . "\r\n"; 
             $header.= "MIME-Version: 1.0\r\n"; 
             $header.= "Content-Type: text/plain; charset=utf-8\r\n"; 
             $header.= "X-Priority: 1\r\n"; 
@@ -72,6 +72,8 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
     modal.style.display = "block";
+    $('#myModal').addClass('animated fadeIn');
+    $('.modal-content').addClass('animated fadeInUp');
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -133,7 +135,7 @@ window.onclick = function(event) {
     require_once 'Mobile_Detect.php';
     $detect = new Mobile_Detect;
     
-    if ( $detect->isMobile() ) {
+    if ( $detect->isMobile()) {
  header('Location: indexMobile.php');
     }
     
@@ -346,6 +348,9 @@ function search($sql){
    
     <script type="text/javascript"> 
         $(document).ready(function(){
+            
+            //Animate the Contact Button
+            //setTimeout(function() {$('#myBtn').animate({left: '-200px'}); }, 2000);
             
             // X-Scroll for Mobile
             $(".scrollContent").scroll(function ()
