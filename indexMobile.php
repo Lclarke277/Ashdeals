@@ -89,8 +89,7 @@
         $dayArray = $_GET['day']; // Array Of Selected Days
             
         $dayString = "'" . implode("', '", $dayArray) . "'"; //Turn Array into String
-        print_r($dayArray);
-        echo $dayString;
+    
             if (count($dayArray) > 1) {
                 $sql = "SELECT * FROM deals WHERE day IN (" . $dayString . ")";
             }

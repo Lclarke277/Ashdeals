@@ -13,14 +13,7 @@
         <title>Ashdeals</title>
         <link rel='icon' type='image/png' href ='Images/small.png'>
         <meta charset = "UTF-8">
-        
         <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
-        <!--
-        media='screen and (min-width: 1100px)'
-        <link rel="stylesheet" media='screen and (min-width: 700px) and (max-width: 1099px)'  href="CSS/mobileMD.css">
-        
-        <link rel="stylesheet" media='screen and (max-width: 699px)'  href="CSS/mobileSM.css">
-        -->
         <link rel="stylesheet" type="text/css" href="CSS/animate.css">
         <link rel="stylesheet" type="text/css" href="CSS/hover.css">
         <script src="viewportchecker.js"></script>   
@@ -41,30 +34,50 @@
 
   <!-- Modal content -->
   <div class="modal-content">
+    <p></p>
     <span class="close">×</span>
     <!-- PHP Mail Form -->
       <iframe name='refresh' style='display: none'></iframe>
       <form method="post" id='contactForm' target='refresh'>
         <input type="text" class='contactInput' name='name' placeholder="Name">  
-        <input type="text" class='contactInput' name='subject' placeholder="Subject">
         <input type="text" class='contactInput' name='email' placeholder="Email">
         <textarea name='message' class='contactInput' placeholder="Your Message"></textarea>
         <input class='button hvr-shrink' id="contactSubmit" type="submit" name="contactSubmit" value="Send">
       </form>
       
-      <?php 
-        if(isset($_POST['contactSubmit'])) {
-            $name = $_POST['name'];
-            $subject = "New Ashdeals.us Email";
-            $email = $_POST['email'];
-            $message = "Name: " . $name . "\r\n" . $_POST['message'];
-            $header = "From: " . $email . "\r\n"; 
-            $header.= "MIME-Version: 1.0\r\n"; 
-            $header.= "Content-Type: text/plain; charset=utf-8\r\n"; 
-            $header.= "X-Priority: 1\r\n"; 
-        mail("lclarke@unca.edu", $subject, $message, $header);
-        }
-      ?>
+<?php 
+    if(isset($_POST['contactSubmit'])) {
+    
+    $name = $_POST['name'];
+    $subject = "New Ashdeals.us Email";
+    $email = $_POST['email'];
+    $message = "Name: " . $name . "\r\n" . $_POST['message'] . "<br>";
+        
+    require_once 'PHPMailer/PHPMailerAutoload.php';
+   // require_once 'PHPMailer/class.smtp.php';
+    $mail = new PHPMailer;
+    $mail->isSMTP();
+
+    //$mail->SMTPDebug = 2;
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = 587;
+    $mail->SMTPSecure = 'tls';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'lclarke@unca.edu';
+    $mail->Password = 'Randan27!';
+    
+    
+    $mail->IsHTML(true);
+
+    $mail->SetFrom('Admin@Ashdeals.us');
+    $mail->AddAddress('lclarke@unca.edu', 'Lucas Clarke');
+
+    $mail->Subject = $subject;
+    $mail->msgHTML = $message;
+    $mail->Body =  $message;
+    $mail->send();
+    }
+?>
   </div>
 
 </div>
@@ -105,8 +118,7 @@ submit.onclick = function() {
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
-        modal.style.display = "none";
-        
+    modal.style.display = "none";
     }
 }
 </script>
@@ -358,6 +370,58 @@ function search($sql){
         // Format as Image Later //
         echo "<img src='Images/noResults.png' class='noResults animated flipInX'>";
     } 
+}; // Search Function
+    
+    function initSearch($sql){ // Load Todays Deals
+    include("connection.php");
+    
+    // Setting 'Today'
+    date_default_timezone_set('EST');
+    $today = date("l"); // Integer Representing Today
+       
+        echo "<div id='tableContainer' class='tableContainer'>";
+            echo "<table class='scrollTable'>";
+             echo "<thead class='fixedHeader'>
+                <tr class='headerWrap animated fadeInUp'>
+                <th class='headerLocation'>Location</th>";
+      
+            echo "<th class='headerDay today'>" . $today . "</th>";
+
+        echo "</thead>";
+    echo "</tr>";
+    echo "<tbody class='scrollContent'>";  
+        
+    // Query Database  
+    $result = $mysqli->query($sql);   
+    $array = array();
+    $odd = true;
+    
+    while($row = mysqli_fetch_assoc($result)){    
+        $array[] = $row;
+    };
+        
+      for ($i = 0; $i < count($array); $i++){
+
+        // Creating Odd and Even Classes
+        if ($odd == true){
+        echo "<tr class='odd animated flipInX'>";
+            
+        } else {
+        echo "<tr class='even animated flipInX'>";
+        } // End Odd & Even
+          
+        echo "<td class='location'>" . $array[$i]['location'] . "</td>";
+     
+        echo "<td class='deal today'>" . $array[$i]['deal'] . "</td>";
+                 $i++;
+
+        echo "</tr>";
+        
+        $odd = !$odd;
+      };
+        echo "</tbody>";
+        echo "</table>"; 
+        echo "</div>";
 }; // Search Function
       
     ?>

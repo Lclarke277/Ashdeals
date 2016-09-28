@@ -1,7 +1,0 @@
-('Locatrion', 'Mo', 'Deal'),
-('Locatrion', 'Tu', 'Deal'),
-('Locatrion', 'We', 'Deal'),
-('Locatrion', 'Th', 'Deal'),
-('Locatrion', 'Fr', 'Deal'),
-('Locatrion', 'Sa', 'Deal'),
-('Locatrion', 'Su', 'Deal'),
