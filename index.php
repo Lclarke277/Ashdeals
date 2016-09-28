@@ -1,3 +1,12 @@
+<?php 
+    // MobileDetect.net for detecting device
+    require_once 'Mobile_Detect.php';
+    $detect = new Mobile_Detect;
+    
+    if ( $detect->isMobile()) {
+        header('Location: indexMobile.php');
+    }
+?>
 <!DOCTYPE HTML>
 <html lang=en>
     <head>
@@ -34,7 +43,8 @@
   <div class="modal-content">
     <span class="close">×</span>
     <!-- PHP Mail Form -->
-      <form method="post" id='contactForm'>
+      <iframe name='refresh' style='display: none'></iframe>
+      <form method="post" id='contactForm' target='refresh'>
         <input type="text" class='contactInput' name='name' placeholder="Name">  
         <input type="text" class='contactInput' name='subject' placeholder="Subject">
         <input type="text" class='contactInput' name='email' placeholder="Email">
@@ -69,6 +79,9 @@ var btn = document.getElementById("myBtn");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
+// Get the submit button element
+var submit = document.getElementById("contactSubmit");
+
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
     modal.style.display = "block";
@@ -81,10 +94,19 @@ span.onclick = function() {
     modal.style.display = "none";
 }
 
+// Close Window After Submit
+submit.onclick = function() {
+    $('#myModal').addClass('animated fadeOut');
+    $('.modal-content').addClass('animated fadeOutUp');
+    $('#myBtn').addClass('animated fadeOutRight');
+    setTimeout('modal.style.display = "none";', 700); 
+}
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        
     }
 }
 </script>
@@ -131,13 +153,6 @@ window.onclick = function(event) {
     </div><!-- header -->
     
 <?php 
-    // MobileDetect.net for detecting device
-    require_once 'Mobile_Detect.php';
-    $detect = new Mobile_Detect;
-    
-    if ( $detect->isMobile()) {
- header('Location: indexMobile.php');
-    }
     
     // Setting 'Today'
     date_default_timezone_set('EST');
@@ -189,6 +204,7 @@ window.onclick = function(event) {
     } else { // Last Call AKA No Input
         
         $sql = "SELECT * FROM deals";
+        search($sql);
         
     };
     

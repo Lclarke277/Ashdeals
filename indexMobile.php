@@ -88,8 +88,9 @@
         
         $dayArray = $_GET['day']; // Array Of Selected Days
             
-        $dayString = "'" . implode("', '", $dayArray) . "'"; //Turn Array into 
-    
+        $dayString = "'" . implode("', '", $dayArray) . "'"; //Turn Array into String
+        print_r($dayArray);
+        echo $dayString;
             if (count($dayArray) > 1) {
                 $sql = "SELECT * FROM deals WHERE day IN (" . $dayString . ")";
             }
@@ -112,9 +113,10 @@
         }
         
     } else { // Last Call AKA No Input
-        
-        $sql = "SELECT * FROM deals";
-        
+        date_default_timezone_set('EST');
+        $today = "'" . date("l") . "'"; // Format Today For The Query
+        $sql = "SELECT * FROM deals WHERE day IN (" . $today . ") AND deal != ''";
+        initSearch($sql);  
     };
     
     // Search Function
@@ -267,6 +269,58 @@ function search($sql){
         // Format as Image Later //
         echo "<img src='Images/noResults.png' class='noResults animated flipInX'>";
     } 
+}; // Search Function
+
+    function initSearch($sql){ // Load Todays Deals
+    include("connection.php");
+    
+    // Setting 'Today'
+    date_default_timezone_set('EST');
+    $today = date("l"); // Integer Representing Today
+       
+        echo "<div id='tableContainer' class='tableContainer'>";
+            echo "<table class='scrollTable'>";
+             echo "<thead class='fixedHeader'>
+                <tr class='headerWrap animated fadeInUp'>
+                <th class='headerLocation'>Location</th>";
+      
+            echo "<th class='headerDay today'>" . $today . "</th>";
+
+        echo "</thead>";
+    echo "</tr>";
+    echo "<tbody class='scrollContent'>";  
+        
+    // Query Database  
+    $result = $mysqli->query($sql);   
+    $array = array();
+    $odd = true;
+    
+    while($row = mysqli_fetch_assoc($result)){    
+        $array[] = $row;
+    };
+        
+      for ($i = 0; $i < count($array); $i++){
+
+        // Creating Odd and Even Classes
+        if ($odd == true){
+        echo "<tr class='odd animated flipInX'>";
+            
+        } else {
+        echo "<tr class='even animated flipInX'>";
+        } // End Odd & Even
+          
+        echo "<td class='location'>" . $array[$i]['location'] . "</td>";
+     
+        echo "<td class='deal today'>" . $array[$i]['deal'] . "</td>";
+                 $i++;
+
+        echo "</tr>";
+        
+        $odd = !$odd;
+      };
+        echo "</tbody>";
+        echo "</table>"; 
+        echo "</div>";
 }; // Search Function
       
     ?>
