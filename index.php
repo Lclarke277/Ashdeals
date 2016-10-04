@@ -34,50 +34,10 @@
 
   <!-- Modal content -->
   <div class="modal-content">
-    <p></p>
-    <span class="close">×</span>
-    <!-- PHP Mail Form -->
-      <iframe name='refresh' style='display: none'></iframe>
-      <form method="post" id='contactForm' target='refresh'>
-        <input type="text" class='contactInput' name='name' placeholder="Name">  
-        <input type="text" class='contactInput' name='email' placeholder="Email">
-        <textarea name='message' class='contactInput' placeholder="Your Message"></textarea>
-        <input class='button hvr-shrink' id="contactSubmit" type="submit" name="contactSubmit" value="Send">
-      </form>
-      
-<?php 
-    if(isset($_POST['contactSubmit'])) {
-    
-    $name = $_POST['name'];
-    $subject = "New Ashdeals.us Email";
-    $email = $_POST['email'];
-    $message = "Name: " . $name . "\r\n" . $_POST['message'] . "<br>";
-        
-    require_once 'PHPMailer/PHPMailerAutoload.php';
-   // require_once 'PHPMailer/class.smtp.php';
-    $mail = new PHPMailer;
-    $mail->isSMTP();
+        <span class="close">×</span>
 
-    //$mail->SMTPDebug = 2;
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Port = 587;
-    $mail->SMTPSecure = 'tls';
-    $mail->SMTPAuth = true;
-    $mail->Username = 'lclarke@unca.edu';
-    $mail->Password = 'Randan27!';
-    
-    
-    $mail->IsHTML(true);
+      <iframe allowTransparency="true" style="min-height:300px; height:inherit; overflow:auto;"  width="100%" name="contactform123" marginwidth="0" marginheight="0" frameborder="0" id="contactFrame" scrolling="no" src="123Contact.html"></iframe>
 
-    $mail->SetFrom('Admin@Ashdeals.us');
-    $mail->AddAddress('lclarke@unca.edu', 'Lucas Clarke');
-
-    $mail->Subject = $subject;
-    $mail->msgHTML = $message;
-    $mail->Body =  $message;
-    $mail->send();
-    }
-?>
   </div>
 
 </div>
@@ -93,7 +53,7 @@ var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 
 // Get the submit button element
-var submit = document.getElementById("contactSubmit");
+var submit = document.getElementById("id123-button-send");
 
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
@@ -117,7 +77,7 @@ submit.onclick = function() {
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-    if (event.target == modal) {
+    if (event.target !== modal) {
     modal.style.display = "none";
     }
 }
@@ -151,13 +111,13 @@ window.onclick = function(event) {
     
     <div id='dayForm'>
         <form method="get">
-          <input type="checkbox" name='day[]' id='day1' value="Sunday"><label for='day1'>Sunday</label>
-          <input type="checkbox" name='day[]' id='day2' value="Monday"><label for='day2'>Monday</label>
-          <input type="checkbox" name='day[]' id='day3' value="Tuesday"><label for='day3'>Tuesday</label>
-          <input type="checkbox" name='day[]' id='day4' value="Wednesday"><label for='day4'>Wednesday</label>
-          <input type="checkbox" name='day[]' id='day5' value="Thursday"><label for='day5'>Thursday</label>
-          <input type="checkbox" name='day[]' id='day6' value="Friday"><label for='day6'>Friday</label>
-          <input type="checkbox" name='day[]' id='day7' value="Saturday"><label for='day7'>Saturday</label>
+          <input type="checkbox" name='day[]' id='day1' value="Sunday"><label class='label' for='day1'>Sunday</label>
+          <input type="checkbox" name='day[]' id='day2' value="Monday"><label class='label' for='day2'>Monday</label>
+          <input type="checkbox" name='day[]' id='day3' value="Tuesday"><label class='label' for='day3'>Tuesday</label>
+          <input type="checkbox" name='day[]' id='day4' value="Wednesday"><label class='label' for='day4'>Wednesday</label>
+          <input type="checkbox" name='day[]' id='day5' value="Thursday"><label class='label' for='day5'>Thursday</label>
+          <input type="checkbox" name='day[]' id='day6' value="Friday"><label class='label' for='day6'>Friday</label>
+          <input type="checkbox" name='day[]' id='day7' value="Saturday"><label class='label' for='day7'>Saturday</label>
           <input class='button hvr-shrink' type="submit" name='daySubmit' id='daySubmit' value="Search">
         </form>
     </div><!-- dayForm -->
