@@ -20,8 +20,16 @@ body {
 #logoMain {
     display: block;
     margin: 0 auto;
-    width: 80%;
+    width: 60%;
     margin-bottom: 5px;
+}
+
+#contactBtn {
+    float: right;
+    width: 40%;
+    margin-right: -10px;
+    margin-top: 5px;
+    
 }
 
 #locForm {

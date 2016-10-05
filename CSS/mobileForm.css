@@ -1,0 +1,29 @@
+body {
+    background-color: black;
+    background-image: url(../Images/headerMobile.jpg);
+    background-size: cover;
+    overflow: hidden;
+}
+
+/* Label */
+#id123-title22471749, #id123-title22471745, #id123-title22471736, #verifno {
+    font-size: 35px;
+}
+
+#id123-control22471749, #id123-control22471745, #id123-control22471736, #id123-button-send {
+    font-size: 35px;
+}
+
+#id123-button-send {
+    padding: 10px 25%;
+    width: 80%;
+    margin-left: -5%;
+}
+
+#id123-captcha {
+    padding-left: -10%;
+}
+
+#row1{
+    margin-top: 20vh;
+}
