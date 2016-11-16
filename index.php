@@ -83,26 +83,22 @@ window.onclick = function(event) {
 }
 </script>
 
-<div id='forms'>   
+<div id='forms'> 
     <form method="post">
         <p class='search'></p>
         <input type="text" name="search" placeholder="Location Name" class='formField'>
         <input class='button hvr-shrink' id="initial" type="submit" name="locSubmit" value="Search">
     </form>
     
+    
 <div id='catForm'>
     <form method='post'>
        <p class="search"></p> 
        <select name="search" class='formField' id='dropdown'>
-            <option value="">Catagory...</option>
-            <option value="Bar">Bar</option>
-            <option value="BBQ">BBQ</option>
-            <option value="Brewery">Brewery</option>
-            <option value="Burger">Burger</option>
-            <option value="Chicken">Chicken</option>
-            <option value="Chicken">Developer Pick</option>
-            <option value="Italian">Italian</option>
-            <option value="Mexican">Mexican</option>
+            <option value="" disabled selected>Location Type</option>
+            <option value="Beer">Beer</option>
+            <option value="Food">Food</option>
+            <option value="Food & Beer">Food / Beer</option>
             <option value="Pizza">Pizza</option>
           </select>
         <input class='button hvr-shrink' type="submit" name="catSubmit" value="Search">
@@ -181,7 +177,7 @@ window.onclick = function(event) {
     };
     
     // Search Function
-function search($sql){ 
+    function search($sql){ 
     include("connection.php");
     
     // Setting 'Today'
@@ -226,7 +222,7 @@ function search($sql){
         echo "<tr class='even animated flipInX'>";
         }
           
-          echo "<td class='location'>" . $array[$i]['location'] . "</td>";
+          echo "<td class='location'><a href=" . $array[$i]['url'] . ">" . $array[$i]['location'] . "</a></td>";
           
           echo "<td class='deal 0'>" . $array[$i]['deal'] . "</td>";
           $i++;

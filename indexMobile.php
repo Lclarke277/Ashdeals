@@ -17,8 +17,6 @@
 
 <div id='header'>
 
-  <a href="123ContactMobile.html"><input type='image' src="Images/contact.png" id='contactBtn' class='hvr-wobble-vertical'></a>  
-
     <img id='logoMain' src='Images/logo.png'>
     
 
@@ -33,15 +31,10 @@
     <form method='post'>
        <p class="search"></p> 
        <select name="search" class='formField' id='dropdown'>
-            <option value="">Catagory...</option>
-            <option value="Bar">Bar</option>
-            <option value="BBQ">BBQ</option>
-            <option value="Brewery">Brewery</option>
-            <option value="Burger">Burger</option>
-            <option value="Chicken">Chicken</option>
-            <option value="Chicken">Developer Pick</option>
-            <option value="Italian">Italian</option>
-            <option value="Mexican">Mexican</option>
+             <option value="" disabled selected>Location Type</option>
+            <option value="Beer">Beer</option>
+            <option value="Food">Food</option>
+            <option value="Food & Beer">Food / Beer</option>
             <option value="Pizza">Pizza</option>
           </select>
         <input class='button hvr-shrink' type="submit" name="catSubmit" value="Search">

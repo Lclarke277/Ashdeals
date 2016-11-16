@@ -20,7 +20,7 @@ body {
 #logoMain {
     display: block;
     margin: 0 auto;
-    width: 60%;
+    width: 80%;
     margin-bottom: 5px;
 }
 
@@ -154,6 +154,7 @@ p.search, form { /* Form Text */
 a { /* Location Links */
     text-decoration: none;
     color: #081930;
+    font-weight: bold;
 }
 
 #catForm {
@@ -249,6 +250,13 @@ td.deal {
 
 td.location {
     width: auto;
+    font-weight: bold;
+}
+
+/* Cell Borders */
+th.headerLocation, th.headerDay {
+    border-bottom: solid black 3px;
+    border-radius: 0px;
 }
 
 .today { /* Formatting Todays Deals */

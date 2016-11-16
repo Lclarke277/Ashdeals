@@ -202,6 +202,7 @@ p.search, form { /* Form Text */
 a { /* Location Links */
     text-decoration: none;
     color: #081930;
+    font-weight: bold;
 }
 
 #catForm {
@@ -279,11 +280,21 @@ td.deal {
     width: 12%;
     text-align: left;
     padding: 10px;
+    text-align: center;
 }
 
 td.location {
     width: 15%;
+    font-weight: bold;
+   
 }
+
+/* Cell Borders */
+th.headerLocation, th.headerDay {
+    border-bottom: solid black 3px;
+    border-radius: 0px;
+}
+
 
 .today { /* Formatting Todays Deals */
     background-color: #827258;
@@ -336,7 +347,7 @@ thead.fixedHeader tr {
 
 body tbody.scrollContent {
 	display: block;
-	height: 70vh;
+	height: 67vh;
 	overflow: auto;
     width: 100%;
 }

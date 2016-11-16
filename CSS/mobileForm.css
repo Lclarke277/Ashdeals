@@ -6,11 +6,12 @@ body {
 }
 
 /* Label */
-#id123-title22471749, #id123-title22471745, #id123-title22471736, #verifno {
+#id123-title23439420, #id123-title23439418, #id123-title23439419, #verifno {
     font-size: 35px;
 }
 
-#id123-control22471749, #id123-control22471745, #id123-control22471736, #id123-button-send {
+/* Field */
+#id123-control23439418, #id123-control23439419, #id123-control23439420, #id123-button-send {
     font-size: 35px;
 }
 
