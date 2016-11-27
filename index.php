@@ -13,6 +13,8 @@
         <title>Ashdeals</title>
         <link rel='icon' type='image/png' href ='Images/small.png'>
         <meta charset = "UTF-8">
+        <meta name="description" content="Search for updated and exclusivly listed deals in the Asheville area on Ashdeals.us" />
+        <meta name="keywords" content="Ashdeals, Asheville, specials, weekly deals, drink special">
         <link rel="stylesheet" type="text/css" href="CSS/stylesheet.css">
         <link rel="stylesheet" type="text/css" href="CSS/animate.css">
         <link rel="stylesheet" type="text/css" href="CSS/hover.css">
@@ -96,10 +98,10 @@ window.onclick = function(event) {
        <p class="search"></p> 
        <select name="search" class='formField' id='dropdown'>
             <option value="" disabled selected>Location Type</option>
-            <option value="Beer">Beer</option>
             <option value="Food">Food</option>
-            <option value="Food & Beer">Food / Beer</option>
+            <option value="Food Beer">Food &amp; Beer</option>
             <option value="Pizza">Pizza</option>
+            <option value="Dev">Ashdeals Picks</option>
           </select>
         <input class='button hvr-shrink' type="submit" name="catSubmit" value="Search">
       </form>
@@ -129,7 +131,7 @@ window.onclick = function(event) {
     // Location Search //
     if (isset($_POST['locSubmit'])) {
         
-        //$sql = "SELECT * FROM deals WHERE day IN ('Monday')";
+        // Select from deals where the locations contains the searched variable
         $sql = "SELECT * FROM deals WHERE location like '%" . $_POST['search'] . "%'";
         search($sql);
     
@@ -213,7 +215,7 @@ window.onclick = function(event) {
     <tbody class='scrollContent'>";
       
       for ($i = 0; $i < count($array); $i++){
-        
+    
         if ($odd == true){
         echo "<tr class='odd animated flipInX'>";
         }
@@ -222,7 +224,9 @@ window.onclick = function(event) {
         echo "<tr class='even animated flipInX'>";
         }
           
-          echo "<td class='location'><a href=" . $array[$i]['url'] . ">" . $array[$i]['location'] . "</a></td>";
+          echo "<td class='location'>" . $array[$i]['location'] . "<hr class='locLine'>
+          <a href=" . $array[$i]['url'] . "><img src='Images/locations/" . $array[$i]['location'] . ".png' class='locIcon'></a>
+          </td>";
           
           echo "<td class='deal 0'>" . $array[$i]['deal'] . "</td>";
           $i++;
@@ -302,7 +306,9 @@ window.onclick = function(event) {
         echo "<tr class='even animated flipInX'>";
         } // End Odd & Even
           
-          echo "<td class='location'>" . $array[$i]['location'] . "</td>";
+          echo "<td class='location'>" . $array[$i]['location'] . "<hr class='locLine'>
+          <a href=" . $array[$i]['url'] . "><img src='Images/locations/" . $array[$i]['location'] . ".png' class='locIcon'></a>
+          </td>";
      
            // For Loop for Each Day Chosen
              for ($j = 0; $j < count($dayArray) - 1; $j++){
@@ -366,7 +372,10 @@ window.onclick = function(event) {
         echo "<tr class='even animated flipInX'>";
         } // End Odd & Even
           
-        echo "<td class='location'>" . $array[$i]['location'] . "</td>";
+          // Location, Line Separator, Location Image
+        echo "<td class='location'>" . $array[$i]['location'] . "<hr class='locLine'>
+          <a href=" . $array[$i]['url'] . "><img src='Images/locations/" . $array[$i]['location'] . ".png' class='locIcon'></a>
+          </td>";
      
         echo "<td class='deal today'>" . $array[$i]['deal'] . "</td>";
                  $i++;
@@ -385,18 +394,11 @@ window.onclick = function(event) {
     <script type="text/javascript"> 
         $(document).ready(function(){
             
-            //Animate the Contact Button
-            //setTimeout(function() {$('#myBtn').animate({left: '-200px'}); }, 2000);
-            
             // X-Scroll for Mobile
             $(".scrollContent").scroll(function ()
             {   
                 $(".fixedHeader").offset({ left: -1*this.scrollLeft });
             });
-            
-           // Match header width to table width   
-           // ONLY RUN ON MOBILE       
-           //$(".fixedHeader").width($('.odd').width());
             
            // Add the 'Today' class to day header
            $("." + <?php echo $today ?>).addClass('today');

@@ -27,6 +27,20 @@ body {
     margin-bottom: 5px;
 }
 
+.locIcon {
+    width: 70%;
+    max-width: 150px;
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+    max-height: 150px;
+}
+
+.locLine {
+    width: 80%;
+    margin-bottom: 0px;
+}
+
 #contactSubmit {
     margin: 10px auto 0 auto;
     display: block;
@@ -286,6 +300,8 @@ td.deal {
 td.location {
     width: 15%;
     font-weight: bold;
+    padding-top: 5px;
+    padding: 7px;
    
 }
 
@@ -348,7 +364,7 @@ thead.fixedHeader tr {
 body tbody.scrollContent {
 	display: block;
 	height: 67vh;
-	overflow: auto;
+	overflow-y: auto;
     width: 100%;
 }
 

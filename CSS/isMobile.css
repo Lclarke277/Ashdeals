@@ -24,6 +24,15 @@ body {
     margin-bottom: 5px;
 }
 
+.locIcon {
+    width: 80%;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
+    padding: 5px;
+    max-height: 200px;
+}
+
 #contactBtn {
     float: right;
     width: 40%;

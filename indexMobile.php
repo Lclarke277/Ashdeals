@@ -4,7 +4,8 @@
         <title>Ashdeals</title>
         <link rel='icon' type='image/png' href ='Images/small.png'>
         <meta charset = "UTF-8">
-        
+        <meta name="description" content="Search for updated and exclusivly listed deals in the Asheville area on Ashdeals.us" />
+        <meta name="keywords" content="Ashdeals, Asheville, specials, weekly deals, drink special">
         <link rel="stylesheet" type="text/css" href="CSS/isMobile.css">
         <link rel="stylesheet" type="text/css" href="CSS/animate.css">
         <link rel="stylesheet" type="text/css" href="CSS/hover.css">
@@ -17,7 +18,7 @@
 
 <div id='header'>
 
-    <img id='logoMain' src='Images/logo.png'>
+    <img id='logoMain' src='Images/logo.png' alt='Ashdeals'>
     
 
 <div id='forms'>   
@@ -161,7 +162,9 @@ function search($sql){
         echo "<tr class='even animated flipInX'>";
         }
           
-          echo "<td class='location'>" . $array[$i]['location'] . "</td>";
+          echo "<td class='location'>" . $array[$i]['location'] . "<hr class='locLine'>
+          <a href=" . $array[$i]['url'] . "><img src='Images/locations/" . $array[$i]['location'] . ".png' class='locIcon'></a>
+          </td>";
           
           echo "<td class='deal 0'>" . $array[$i]['deal'] . "</td>";
           $i++;
@@ -241,7 +244,9 @@ function search($sql){
         echo "<tr class='even animated flipInX'>";
         } // End Odd & Even
           
-          echo "<td class='location'>" . $array[$i]['location'] . "</td>";
+          echo "<td class='location'>" . $array[$i]['location'] . "<hr class='locLine'>
+          <a href=" . $array[$i]['url'] . "><img src='Images/locations/" . $array[$i]['location'] . ".png' class='locIcon'></a>
+          </td>";
      
            // For Loop for Each Day Chosen
              for ($j = 0; $j < count($dayArray) - 1; $j++){
@@ -305,7 +310,9 @@ function search($sql){
         echo "<tr class='even animated flipInX'>";
         } // End Odd & Even
           
-        echo "<td class='location'>" . $array[$i]['location'] . "</td>";
+        echo "<td class='location'>" . $array[$i]['location'] . "
+          <a href=" . $array[$i]['url'] . "><img src='Images/locations/" . $array[$i]['location'] . ".png' class='locIcon'></a>
+          </td>";
      
         echo "<td class='deal today'>" . $array[$i]['deal'] . "</td>";
                  $i++;
